@@ -4,6 +4,10 @@ UK Healthcare Business Intelligence — the MedTwenty web app, built to the **Me
 
 One verified story each weekday, a Friday briefing and a monthly analysis, run by one editor in about 10 hours a week.
 
+## Screenshots
+
+See `docs/screenshots/` for the homepage, an article, membership and the Control Room.
+
 ## Run it
 
 ```bash
