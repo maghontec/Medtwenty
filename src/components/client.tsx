@@ -243,3 +243,28 @@ export function CopyButton({ text }: { text: string }) {
     </button>
   );
 }
+
+/**
+ * Forms with several submit buttons (name="op" value="publish" etc.) rely on the
+ * clicked button's name/value. React's form actions don't always include the
+ * submitter, so copy it into a hidden field just before submission.
+ */
+export function SubmitterShim() {
+  useEffect(() => {
+    const onClick = (e: MouseEvent) => {
+      const btn = (e.target as HTMLElement | null)?.closest?.("button[name]") as HTMLButtonElement | null;
+      if (!btn || !btn.form || btn.type !== "submit" || btn.disabled) return;
+      const form = btn.form;
+      form.querySelectorAll("input[data-submitter]").forEach((n) => n.remove());
+      const h = document.createElement("input");
+      h.type = "hidden";
+      h.name = btn.name;
+      h.value = btn.value;
+      h.dataset.submitter = "1";
+      form.appendChild(h);
+    };
+    document.addEventListener("click", onClick, true);
+    return () => document.removeEventListener("click", onClick, true);
+  }, []);
+  return null;
+}

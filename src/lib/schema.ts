@@ -230,6 +230,7 @@ CREATE TABLE IF NOT EXISTS deals (
   announced_on TEXT,
   verified INTEGER NOT NULL DEFAULT 0,
   article_id INTEGER REFERENCES articles(id) ON DELETE SET NULL,
+  extracted_item_id INTEGER,
   source TEXT NOT NULL DEFAULT 'manual',
   created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now'))
 );
@@ -245,6 +246,7 @@ CREATE TABLE IF NOT EXISTS regulatory_decisions (
   summary TEXT,
   verified INTEGER NOT NULL DEFAULT 0,
   article_id INTEGER REFERENCES articles(id) ON DELETE SET NULL,
+  extracted_item_id INTEGER,
   source TEXT NOT NULL DEFAULT 'manual',
   created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now'))
 );

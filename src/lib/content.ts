@@ -89,7 +89,7 @@ export function publishedInEdition(editionId: number, types: string[] = ["story"
 }
 
 export function countInEdition(editionId: number): number {
-  return scalar<number>(`SELECT COUNT(*) FROM articles a WHERE ${PUBLISHED} AND a.edition_id = ?`, editionId) ?? 0;
+  return scalar<number>(`SELECT COUNT(*) FROM articles a WHERE ${PUBLISHED} AND a.edition_id = ? AND a.content_type != 'briefing'`, editionId) ?? 0;
 }
 
 export function latestPublished(types: string[] = ["story", "analysis"]): Article | undefined {

@@ -63,7 +63,7 @@ async function setCookie(name: string, value: string, maxAgeDays: number) {
   jar.set(name, value, {
     httpOnly: true,
     sameSite: "lax",
-    secure: process.env.NODE_ENV === "production",
+    secure: (process.env.APP_URL || "").startsWith("https://"),
     path: "/",
     maxAge: maxAgeDays * 86400,
   });
